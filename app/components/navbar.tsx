@@ -9,7 +9,7 @@ export default function Navbar() {
   const isAdmin = pathname.startsWith('/admin')
 
   return (
-    <nav className={`${isAdmin ? 'bg-slate-900' : 'bg-blue-700'} text-white py-4 px-8 shadow-lg sticky top-0 z-50`}>
+    <nav className={`${isAdmin ? 'bg-black' : 'bg-red-600'} text-white py-4 px-8 shadow-lg sticky top-0 z-50`}>
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="text-xl font-black italic tracking-tighter uppercase">
