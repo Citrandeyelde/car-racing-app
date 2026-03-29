@@ -22,12 +22,14 @@ export default function Navbar() {
             <>
               <Link href="/admin/dashboard" className="hover:text-blue-400 transition">Dashboard</Link>
               <Link href="/admin/productos" className="hover:text-blue-400 transition">Inventario</Link>
+              <Link href="/admin/registro" className="hover:text-blue-400 transition">Usuarios Creacion</Link>
+              
               <Link href="/" className="bg-slate-700 px-3 py-1 rounded text-xs">Ver como Cliente</Link>
             </>
           ) : (
             <>
-              <Link href="/" className="hover:text-slate-200 transition">Catálogo</Link>
-              <Link href="/registro" className="hover:text-slate-200 transition">Registrarse</Link>
+              <Link href="/client/home" className="hover:text-slate-200 transition">Catálogo</Link>
+              <Link href="/client/registro" className="hover:text-slate-200 transition">Registrarse</Link>
               <Link href="/admin/productos" className="bg-blue-800 px-3 py-1 rounded text-xs">Acceso Staff</Link>
             </>
           )}
