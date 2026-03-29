@@ -1,38 +1,60 @@
-'use client'
-import { setCookie } from 'cookies-next';
+'use client';
+
+import { useState } from 'react';
 import { supabase } from '@/app/lib/supabase';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
-export default function LoginPage() {
+export default function WorkerLogin() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const router = useRouter();
 
-  const handleLogin = async (e: any) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
 
-    // 1. Buscamos al trabajador en tu tabla manual
+    // Buscamos al trabajador por email
     const { data, error } = await supabase
       .from('trabajadores')
-      .select('*')
+      .select('id_trabajador, password_hash, activo')
       .eq('email', email)
-      .eq('password_hash', password) // Idealmente aquí usarías bcrypt después
       .single();
 
-    if (data) {
-      // 2. Si existe, creamos una cookie que expire en 1 día
-      setCookie('user_session', 'active', { maxAge: 60 * 60 * 24 });
-      router.push('/admin/home'); // Redirigir al panel
+    if (data && data.password_hash === password) {
+      if (!data.activo) return alert("Cuenta desactivada");
+
+      // GUARDAMOS EL ID REAL EN LA COOKIE
+      Cookies.set('user_session', data.id_trabajador, { 
+        expires: 1, // 1 día de sesión
+        path: '/' 
+      });
+
+      router.push('/admin/home');
     } else {
       alert("Credenciales incorrectas");
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <input name="email" type="email" placeholder="Email" required />
-      <input name="password" type="password" placeholder="Contraseña" required />
-      <button type="submit">Entrar</button>
-    </form>
+    <div className="min-h-screen flex items-center justify-center bg-black">
+      <form onSubmit={handleLogin} className="p-8 bg-zinc-900 rounded-lg border border-red-600">
+        <h1 className="text-white font-black italic mb-4 uppercase">Login Staff</h1>
+        <input 
+          type="email" 
+          placeholder="Email" 
+          className="w-full p-2 mb-2 bg-black text-white border border-zinc-800"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input 
+          type="password" 
+          placeholder="Password" 
+          className="w-full p-2 mb-4 bg-black text-white border border-zinc-800"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button className="w-full bg-red-600 text-white font-bold py-2 italic uppercase">
+          Entrar a Pits
+        </button>
+      </form>
+    </div>
   );
 }
