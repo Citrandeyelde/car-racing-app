@@ -9,7 +9,7 @@ export default function Navbar() {
   const isAdmin = pathname.startsWith('/admin')
 
   return (
-    <nav className={`${isAdmin ? 'bg-slate-900' : 'bg-blue-700'} text-white py-4 px-8 shadow-lg sticky top-0 z-50`}>
+    <nav className={`${isAdmin ? 'bg-black' : 'bg-red-600'} text-white py-4 px-8 shadow-lg sticky top-0 z-50`}>
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="text-xl font-black italic tracking-tighter uppercase">
@@ -22,12 +22,14 @@ export default function Navbar() {
             <>
               <Link href="/admin/dashboard" className="hover:text-blue-400 transition">Dashboard</Link>
               <Link href="/admin/productos" className="hover:text-blue-400 transition">Inventario</Link>
+              <Link href="/admin/registro" className="hover:text-blue-400 transition">Usuarios Creacion</Link>
+              
               <Link href="/" className="bg-slate-700 px-3 py-1 rounded text-xs">Ver como Cliente</Link>
             </>
           ) : (
             <>
-              <Link href="/" className="hover:text-slate-200 transition">Catálogo</Link>
-              <Link href="/registro" className="hover:text-slate-200 transition">Registrarse</Link>
+              <Link href="/client/home" className="hover:text-slate-200 transition">Catálogo</Link>
+              <Link href="/client/registro" className="hover:text-slate-200 transition">Registrarse</Link>
               <Link href="/admin/productos" className="bg-blue-800 px-3 py-1 rounded text-xs">Acceso Staff</Link>
             </>
           )}
