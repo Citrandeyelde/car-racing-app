@@ -30,7 +30,8 @@ export default function Navbar() {
             <>
               <Link href="/client/home" className="hover:text-slate-200 transition">Catálogo</Link>
               <Link href="/client/registro" className="hover:text-slate-200 transition">Registrarse</Link>
-              <Link href="/admin/productos" className="bg-blue-800 px-3 py-1 rounded text-xs">Acceso Staff</Link>
+              <Link href="/client/profile" className="hover:text-slate-200 transition">Registrarse</Link>
+              <Link href="/admin/dashboard" className="bg-blue-800 px-3 py-1 rounded text-xs">Acceso Staff</Link>
             </>
           )}
         </div>
