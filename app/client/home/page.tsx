@@ -22,7 +22,7 @@ export default function HomeClientes() {
       const { data, error } = await supabase
         .from('productos')
         .select('*')
-        .eq('activo', true) // Solo mostrar productos marcados como activos
+        .eq('activo', true) 
         .order('id_producto', { ascending: false });
 
       if (error) {

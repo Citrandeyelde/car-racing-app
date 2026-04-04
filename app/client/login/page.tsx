@@ -14,20 +14,17 @@ export default function LoginCliente() {
     e.preventDefault();
     setLoading(true);
 
-    // Consulta manual a tu tabla de clientes
     const { data, error } = await supabase
       .from('clientes')
       .select('id_cliente, nombre_completo, email, password, activo')
       .eq('email', email)
-      .single(); // Esperamos un único resultado
+      .single();
 
     if (error || !data) {
       alert("⚠️ Piloto no encontrado. Verifica tus credenciales.");
       setLoading(false);
       return;
     }
-
-    // Validación de password (Texto plano según tu configuración actual)
     if (data.password === password) {
       if (!data.activo) {
         alert("🚫 Tu cuenta de piloto está desactivada.");
@@ -35,14 +32,13 @@ export default function LoginCliente() {
         return;
       }
 
-      // Éxito: Guardamos la sesión de forma básica (puedes usar cookies o localStorage)
       localStorage.setItem('user_session', JSON.stringify({
         id: data.id_cliente,
         nombre: data.nombre_completo
       }));
 
       alert(`✅ ¡Bienvenido de nuevo, ${data.nombre_completo}!`);
-      router.push('/client/profile'); // Redirigir al perfil del cliente
+      router.push('/client/profile'); 
     } else {
       alert("❌ Contraseña incorrecta.");
     }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { supabase } from '@/app/lib/supabase'; // Asegúrate de que esta ruta sea correcta
+import { supabase } from '@/app/lib/supabase';
 
 interface Categoria {
   id_categoria: number;
@@ -14,7 +14,7 @@ export default function RegistroProducto() {
   
   const [formData, setFormData] = useState({
     nombre: '',
-    id_categoria: '', // Guardamos el ID seleccionado
+    id_categoria: '', 
     descripcion: '',
     precio: '',
     stock: 0,
@@ -22,7 +22,6 @@ export default function RegistroProducto() {
     activo: true
   });
 
-  // 1. Cargar categorías al iniciar
   useEffect(() => {
     const fetchCategorias = async () => {
       const { data, error } = await supabase
@@ -50,7 +49,6 @@ export default function RegistroProducto() {
     e.preventDefault();
     setLoading(true);
 
-    // Mapeo exacto a tu tabla public.productos
     const { error } = await supabase
       .from('productos')
       .insert([{

@@ -21,8 +21,6 @@ export default function RegistroCliente() {
     e.preventDefault();
     setLoading(true);
 
-    // Como no usas Supabase Auth, generamos un UUID para el id_cliente
-    // Si tu columna id_cliente es 'uuid' y no tiene default gen_random_uuid(), lo generamos aquí:
     const nuevoId = crypto.randomUUID(); 
 
     const { error } = await supabase
@@ -32,7 +30,7 @@ export default function RegistroCliente() {
           id_cliente: nuevoId,
           nombre_completo: formData.nombre_completo,
           email: formData.email,
-          password: formData.password, // Ahora sí enviamos el password que la tabla exige
+          password: formData.password,
           telefono: formData.telefono,
           direccion: formData.direccion,
           activo: true

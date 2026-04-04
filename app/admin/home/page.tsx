@@ -12,7 +12,6 @@ export default function DashboardTrabajador() {
 
   useEffect(() => {
     const fetchWorkerData = async () => {
-      // 1. Leer el ID desde la cookie
       const workerId = Cookies.get('user_session');
 
       if (!workerId) {
@@ -20,7 +19,6 @@ export default function DashboardTrabajador() {
         return;
       }
 
-      // 2. Consultar Supabase usando ese ID
       const { data, error } = await supabase
         .from('trabajadores')
         .select('*')
@@ -58,7 +56,6 @@ export default function DashboardTrabajador() {
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Card de Inventario */}
           <div className="bg-zinc-900 p-8 rounded-sm border-l-4 border-red-600 hover:bg-zinc-800 transition-colors cursor-pointer">
             <h3 className="text-xl font-black uppercase italic mb-2">Gestionar Productos</h3>
             <p className="text-zinc-400 text-sm mb-4">Añadir, editar o eliminar repuestos del inventario general.</p>
@@ -66,7 +63,6 @@ export default function DashboardTrabajador() {
              className="text-red-500 font-bold text-xs uppercase tracking-widest hover:text-white">Acceder →</button>
           </div>
 
-          {/* Card de Personal (Solo Gerentes) */}
           {user.rol === 'gerente' && (
             <div className="bg-zinc-900 p-8 rounded-sm border-l-4 border-white hover:bg-zinc-800 transition-colors cursor-pointer">
               <h3 className="text-xl font-black uppercase italic mb-2">Control de Personal</h3>

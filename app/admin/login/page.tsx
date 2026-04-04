@@ -13,7 +13,6 @@ export default function WorkerLogin() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Buscamos al trabajador por email
     const { data, error } = await supabase
       .from('trabajadores')
       .select('id_trabajador, password_hash, activo')
@@ -23,13 +22,9 @@ export default function WorkerLogin() {
     if (data && data.password_hash === password) {
       if (!data.activo) return alert("Cuenta desactivada");
 
-      // GUARDAMOS EL ID REAL EN LA COOKIE
-      Cookies.set('user_session', data.id_trabajador, { 
-        expires: 1, // 1 día de sesión
-        path: '/' 
-      });
-
+      Cookies.set('user_session', data.id_trabajador, { expires: 1,path: '/'});
       router.push('/admin/home');
+      
     } else {
       alert("Credenciales incorrectas");
     }

@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { supabase } from '@/app/lib/supabase'
 
 export default function RegistroTrabajador() {
-  // 1. Creamos un estado inicial vacío
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -17,9 +16,9 @@ export default function RegistroTrabajador() {
     .from('trabajadores') 
     .insert([
       { 
-        nombre_completo: formData.nombre, // Asegúrate que el nombre coincida con tu imagen
+        nombre_completo: formData.nombre, 
         email: formData.email, 
-        password_hash: formData.password // Supabase pondrá el resto por defecto
+        password_hash: formData.password 
       }
     ])
 
@@ -31,7 +30,6 @@ export default function RegistroTrabajador() {
   }
   }
 
-  // Función para capturar lo que el usuario escribe
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,

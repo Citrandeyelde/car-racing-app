@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation'
 export default function Navbar() {
   const pathname = usePathname()
   
-  // Verificamos si estamos en la zona de administración
   const isAdmin = pathname.startsWith('/admin')
 
   return (

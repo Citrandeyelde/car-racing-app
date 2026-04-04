@@ -19,7 +19,6 @@ export default function PerfilCliente() {
 
   useEffect(() => {
     const fetchPerfil = async () => {
-      // 1. Obtener el ID del cliente desde la sesión local
       const session = localStorage.getItem('user_session');
       if (!session) {
         router.push('/login');
@@ -28,7 +27,6 @@ export default function PerfilCliente() {
 
       const { id } = JSON.parse(session);
 
-      // 2. Consultar datos en Supabase
       const { data, error } = await supabase
         .from('clientes')
         .select('nombre_completo, email, telefono, direccion, creado_en')
