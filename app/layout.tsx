@@ -1,9 +1,7 @@
-
 import "./globals.css";
 import Navbar from "@/app/components/navbar";
 import Footer from "./components/footpage";
-
-
+import { CartProvider } from "./context/cartContext";
 
 export default function RootLayout({
   children,
@@ -13,9 +11,11 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body>
-        <Navbar />
-        {children}
-        <Footer/>
+        <CartProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

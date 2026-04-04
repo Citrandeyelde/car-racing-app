@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { supabase } from '@/app/lib/supabase';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { supabase } from "@/app/lib/supabase";
+import { useRouter } from "next/navigation";
 
 export default function LoginCliente() {
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -15,9 +15,9 @@ export default function LoginCliente() {
     setLoading(true);
 
     const { data, error } = await supabase
-      .from('clientes')
-      .select('id_cliente, nombre_completo, email, password, activo')
-      .eq('email', email)
+      .from("clientes")
+      .select("id_cliente, nombre_completo, email, password, activo")
+      .eq("email", email)
       .single();
 
     if (error || !data) {
@@ -32,13 +32,16 @@ export default function LoginCliente() {
         return;
       }
 
-      localStorage.setItem('user_session', JSON.stringify({
-        id: data.id_cliente,
-        nombre: data.nombre_completo
-      }));
+      localStorage.setItem(
+        "user_session",
+        JSON.stringify({
+          id: data.id_cliente,
+          nombre: data.nombre_completo,
+        }),
+      );
 
       alert(`✅ ¡Bienvenido de nuevo, ${data.nombre_completo}!`);
-      router.push('/client/profile'); 
+      router.push("/client/profile");
     } else {
       alert("❌ Contraseña incorrecta.");
     }
@@ -50,17 +53,21 @@ export default function LoginCliente() {
     <div className="max-w-sm mx-auto my-20 p-8 bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl relative overflow-hidden">
       {/* Detalle visual superior */}
       <div className="absolute top-0 right-0 w-24 h-24 bg-red-600/10 rounded-full -mr-10 -mt-10 blur-2xl"></div>
-      
+
       <header className="mb-10 text-center">
         <h2 className="text-4xl font-black text-white italic uppercase tracking-tighter">
           Login <span className="text-red-600">Pit</span>
         </h2>
-        <p className="text-zinc-500 text-[10px] uppercase tracking-[0.3em] mt-2">Acceso a la Escudería</p>
+        <p className="text-zinc-500 text-[10px] uppercase tracking-[0.3em] mt-2">
+          Acceso a la Escudería
+        </p>
       </header>
 
       <form onSubmit={handleLogin} className="space-y-6">
         <div>
-          <label className="block text-[10px] font-bold text-zinc-500 uppercase mb-2 ml-1">Email Registrado</label>
+          <label className="block text-[10px] font-bold text-zinc-500 uppercase mb-2 ml-1">
+            Email Registrado
+          </label>
           <input
             required
             type="email"
@@ -72,7 +79,9 @@ export default function LoginCliente() {
         </div>
 
         <div>
-          <label className="block text-[10px] font-bold text-zinc-500 uppercase mb-2 ml-1">Contraseña</label>
+          <label className="block text-[10px] font-bold text-zinc-500 uppercase mb-2 ml-1">
+            Contraseña
+          </label>
           <input
             required
             type="password"
@@ -88,12 +97,18 @@ export default function LoginCliente() {
           disabled={loading}
           className="w-full bg-red-600 hover:bg-red-700 disabled:bg-zinc-800 text-white font-black py-4 rounded-xl uppercase italic tracking-widest transition-all shadow-[0_10px_20px_rgba(220,38,38,0.2)]"
         >
-          {loading ? 'Validando...' : 'Iniciar Motor'}
+          {loading ? "Validando..." : "Iniciar Motor"}
         </button>
 
         <div className="text-center pt-4">
           <p className="text-zinc-500 text-xs">
-            ¿No tienes cuenta? <a href="/registro" className="text-red-500 hover:underline font-bold italic">Regístrate aquí</a>
+            ¿No tienes cuenta?{" "}
+            <a
+              href="/registro"
+              className="text-red-500 hover:underline font-bold italic"
+            >
+              Regístrate aquí
+            </a>
           </p>
         </div>
       </form>
