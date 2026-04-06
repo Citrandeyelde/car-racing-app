@@ -1,5 +1,4 @@
 'use client'
-import { crearProducto } from '@/app/admin/productos/actions'
 import { useRef } from 'react'
 import { redirect } from 'next/navigation'
 
