@@ -3,6 +3,7 @@ import { crearProducto } from '@/app/admin/productos/actions'
 import { useRef } from 'react'
 
 export default function AdminProductos() {
+<<<<<<< Updated upstream
   const formRef = useRef<HTMLFormElement>(null)
 
   return (
@@ -57,3 +58,8 @@ export default function AdminProductos() {
     </div>
   )
 }
+=======
+  redirect('/client/home')
+  return null
+}                                           
+>>>>>>> Stashed changes
